@@ -19,4 +19,7 @@ gera@yerem.in
 Installation
 ===============
 
-Just copy to your plugins folder and activate (or Network activate) it.
+Just copy to your plugins folder and activate it.
+
+If you want to take this project even further reference this article:
+http://themefoundation.com/wordpress-meta-boxes-guide/
