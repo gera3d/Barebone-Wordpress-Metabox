@@ -34,8 +34,8 @@ function the_jam_callback( $post ) {
     ?>
  
     <p>
-        <label for="meta-text" class="thesong">Here Is What I am Jamming:</label>
-        <input type="text" name="meta-text" id="meta-text" value="<?php echo $example_stored_meta['meta-text'][0]; ?>" />
+        <label for="listening" class="thesong">Here Is What I am Jamming:</label>
+        <input type="text" name="listening" id="listening" value="<?php echo ( !empty( $example_stored_meta['listening'][0] ) ) ? esc_attr( $example_stored_meta['listening'][0] ) : ''; ?>" />
     </p>
  
     <?php
@@ -57,8 +57,8 @@ function the_jam_save( $post_id ) {
     }
  
     // 2.4 Checks for input and sanitizes/saves if needed
-    if( isset( $_POST[ 'meta-text' ] ) ) {
-        update_post_meta( $post_id, 'meta-text', sanitize_text_field( $_POST[ 'meta-text' ] ) );
+    if( isset( $_POST[ 'listening' ] ) ) {
+        update_post_meta( $post_id, 'listening', sanitize_text_field( $_POST[ 'listening' ] ) );
     }
  
 } // 2.5 end the_jam_save()
@@ -67,20 +67,21 @@ add_action( 'save_post', 'the_jam_save' );
 /**
  * 3 Display the song on the post
  */
-function insertsong($content) {
-        if(!is_feed() ) {
+function insertsong( $content ) {
+    if(!is_feed() ) {
 
-    // 3.2 Retrieves the stored Song from the database
-    $meta_value = get_post_meta( get_the_ID(), 'meta-text', true );
- 
-    // 3.3 Checks and displays the song in the post
-    if( !empty( $meta_value ) ) {
-        echo "I am Listening to: ";
-        echo $meta_value;
-    }
-
+        // 3.2 Retrieves the stored Song from the database
+        $meta_value = get_post_meta( get_the_ID(), 'listening', true );
+     
+        // 3.3 Checks and displays the song in the post
+        if( !empty( $meta_value ) ) {
+            $meta = "I am Listening to: ";
+            $meta .= esc_html( $meta_value );
+            $content = $meta . $content;
         }
-        return $content;
+
+    }
+    return $content;
 }
 add_filter ('the_content', 'insertsong');
 // We are all done
