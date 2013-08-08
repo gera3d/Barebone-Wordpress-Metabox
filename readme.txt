@@ -16,7 +16,7 @@ In this barebone code base I explain how I am creating a meta box and how you pu
 
 Key Features
 * Its simple
-* Code has comments every step of the way explaining whats going ing
+* Code has comments every step of the way explaining whats going on
 * It has less then 100 lines of php
 * Its packed nicely in a plugin
 
